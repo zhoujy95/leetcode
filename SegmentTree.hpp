@@ -1,8 +1,8 @@
 #program once
 
-class segmentTree {
+class SegmentTree {
 public:
-    segmentTree(vector<int>& nums) {
+    SegmentTree(vector<int>& nums) {
         this->nums = nums;
         trees.resize(nums.size() * 4);
         build_tree(0, nums.size()-1, 0);
