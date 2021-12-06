@@ -1,4 +1,5 @@
-#program once
+#pragma once
+
 class Trie {
 public:
     Trie(): childern(26, nullptr), isEnd(false){
