@@ -1,9 +1,10 @@
 #pragma once
 
 class Dijkstra {
+public:
     Dijkstra(int n) {
         this->n = n;
-        dists.resize(n, vector<int>(n, INT_MAX));
+        dists.resize(n, vector<int>(n, INT_MAX/2));
         for (int i = 0; i < n; ++i) {
             dists[i][i] = 0;
         }
