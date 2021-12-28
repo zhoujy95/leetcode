@@ -2,22 +2,43 @@
 
 class Trie {
 public:
-    Trie(): childern(26, nullptr), isEnd(false){
+    Trie(): children(26, nullptr), isEnd(false){
 
     }
     
-    void insert(string word) {
+    void insert(string& word) {
         Trie* trie = this;
         for(char &ch : word){
             int index =ch-'a';
-            if(!trie->childern[index]){
-                trie->childern[index] = new Trie();
+            if(!trie->children[index]){
+                trie->children[index] = new Trie();
             }
-            trie = trie->childern[index];           
+            trie = trie->children[index];           
         }
         trie->isEnd = true;
     }
-    
+
+    bool dfs(const string & word, int start) {
+        if (word.size() == start) {
+            return true;
+        }
+        Trie* node = this;
+        for (int i = start; i < word.size(); i++) {
+            char ch = word[i];
+            int index = ch - 'a';
+            node = node->children[index];
+            if (node == nullptr) {
+                return false;
+            }
+            if (node->isEnd) {
+                if (dfs(word, i + 1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     bool search(string word) {
         Trie* trie = searchPrefix(word);
         return trie != nullptr && trie->isEnd;
@@ -31,8 +52,8 @@ private:
         Trie* trie = this;
         for(const char &ch : prefix){
             int index =ch-'a';
-            if(trie->childern[index]){
-                trie = trie->childern[index];
+            if(trie->children[index]){
+                trie = trie->children[index];
             }else{
                 return nullptr;
             }
@@ -40,6 +61,6 @@ private:
         return trie;
     }
 
-    vector<Trie*> childern;
+    vector<Trie*> children;
     bool isEnd;
 };
