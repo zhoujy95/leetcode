@@ -10,9 +10,9 @@ public:
     }
 
     void solve() {
-        for (int k = 0; k < 26; ++k) {
-            for (int i = 0; i < 26; ++i) {
-                for (int j = 0; j < 26; ++j) {
+        for (int k = 0; k < n; ++k) {
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
                     dists[i][j] = min(dists[i][j], dists[i][k] + dists[k][j]);
                 }
             }
